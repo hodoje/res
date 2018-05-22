@@ -47,12 +47,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbContextProvider.cs" />
     <Compile Include="IDbContextProvider.cs" />
+    <Compile Include="ModelRepositories\GeoAreaRepository.cs" />
+    <Compile Include="ModelRepositories\PowerConsuptionDataRepository.cs" />
+    <Compile Include="PowerConsuptionDbContext.cs" />
+    <Compile Include="PowerConsuptionMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{6BC85D10-2EAA-4705-8368-D711E94F3DDE}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
