@@ -5,15 +5,15 @@ namespace DataAccess.PowerConsuptionMigrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DataAccess.PowerConsuptionDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DataAccess.PowerConsumptionDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            MigrationsDirectory = @"PowerConsuptionMigrations";
+            MigrationsDirectory = @"PowerConsumptionMigrations";
         }
 
-        protected override void Seed(DataAccess.PowerConsuptionDbContext context)
+        protected override void Seed(DataAccess.PowerConsumptionDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

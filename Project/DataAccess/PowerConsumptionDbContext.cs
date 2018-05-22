@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class PowerConsuptionDbContext : DbContext
+    public class PowerConsumptionDbContext : DbContext
     {
-        public DbSet<PowerConsumptionData> DbPowerConsuptionDataSet { get; set; }
+        public DbSet<PowerConsumptionData> DbPowerConsumptionDataSet { get; set; }
         public DbSet<GeoArea> DbGeoAreaSet { get; set; }
     }
 }

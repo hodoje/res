@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class DbContextProvider : IDbContextProvider<PowerConsuptionDbContext>
+    public class DbContextProvider : IDbContextProvider<PowerConsumptionDbContext>
     {
-        public PowerConsuptionDbContext GetDbContext()
+        public PowerConsumptionDbContext GetDbContext()
         {
-            return new PowerConsuptionDbContext();
+            return new PowerConsumptionDbContext();
         }
     }
 }

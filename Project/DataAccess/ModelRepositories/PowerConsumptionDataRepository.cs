@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace DataAccess.ModelRepositories
 {
-    public class PowerConsuptionDataRepository : IRepository<PowerConsumptionData, int>
+    public class PowerConsumptionDataRepository : IRepository<PowerConsumptionData, int>
     {
-        private readonly PowerConsuptionDbContext _dbContext;
+        private readonly PowerConsumptionDbContext _dbContext;
 
-        public PowerConsuptionDataRepository(IDbContextProvider<PowerConsuptionDbContext> dbContextProvider)
+        public PowerConsumptionDataRepository(IDbContextProvider<PowerConsumptionDbContext> dbContextProvider)
         {
             this._dbContext = dbContextProvider.GetDbContext();
         }
 
         public bool Delete(int id)
         {
-            PowerConsumptionData pcd = _dbContext.DbPowerConsuptionDataSet.Find(id);
-            _dbContext.DbPowerConsuptionDataSet.Remove(pcd);
+            PowerConsumptionData pcd = _dbContext.DbPowerConsumptionDataSet.Find(id);
+            _dbContext.DbPowerConsumptionDataSet.Remove(pcd);
             _dbContext.SaveChanges();
 
             return true;
@@ -28,17 +28,17 @@ namespace DataAccess.ModelRepositories
 
         public IEnumerable<PowerConsumptionData> GetAll()
         {
-            return _dbContext.DbPowerConsuptionDataSet.ToList();
+            return _dbContext.DbPowerConsumptionDataSet.ToList();
         }
 
         public PowerConsumptionData GetById(int id)
         {
-            return _dbContext.DbPowerConsuptionDataSet.Find(id);
+            return _dbContext.DbPowerConsumptionDataSet.Find(id);
         }
 
         public bool Insert(PowerConsumptionData entity)
         {
-            _dbContext.DbPowerConsuptionDataSet.Add(entity);
+            _dbContext.DbPowerConsumptionDataSet.Add(entity);
             _dbContext.SaveChanges();
 
             return true;

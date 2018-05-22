@@ -49,10 +49,9 @@
   <ItemGroup>
     <Compile Include="DbContextProvider.cs" />
     <Compile Include="IDbContextProvider.cs" />
-    <Compile Include="ModelRepositories\GeoAreaRepository.cs" />
-    <Compile Include="ModelRepositories\PowerConsuptionDataRepository.cs" />
-    <Compile Include="PowerConsuptionDbContext.cs" />
-    <Compile Include="PowerConsuptionMigrations\Configuration.cs" />
+    <Compile Include="ModelRepositories\PowerConsumptionDataRepository.cs" />
+    <Compile Include="PowerConsumptionDbContext.cs" />
+    <Compile Include="PowerConsumptionMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
