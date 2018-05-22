@@ -49,9 +49,13 @@
   <ItemGroup>
     <Compile Include="DbContextProvider.cs" />
     <Compile Include="IDbContextProvider.cs" />
+    <Compile Include="PowerConsumptionMigrations\201805222317128_CreateInitialModels.cs" />
+    <Compile Include="PowerConsumptionMigrations\201805222317128_CreateInitialModels.Designer.cs">
+      <DependentUpon>201805222317128_CreateInitialModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PowerConsumptionMigrations\Configuration.cs" />
     <Compile Include="ModelRepositories\PowerConsumptionDataRepository.cs" />
     <Compile Include="PowerConsumptionDbContext.cs" />
-    <Compile Include="PowerConsumptionMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +68,10 @@
       <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="PowerConsumptionMigrations\201805222317128_CreateInitialModels.resx">
+      <DependentUpon>201805222317128_CreateInitialModels.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

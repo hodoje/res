@@ -2,6 +2,7 @@
 using Entities.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,36 +20,96 @@ namespace DataAccess.ModelRepositories
 
         public bool Delete(int id)
         {
+            bool result = false;
             PowerConsumptionData pcd = _dbContext.DbPowerConsumptionDataSet.Find(id);
-            _dbContext.DbPowerConsumptionDataSet.Remove(pcd);
-            _dbContext.SaveChanges();
-
-            return true;
+            if (pcd != null)
+            {
+                try
+                {
+                    _dbContext.DbPowerConsumptionDataSet.Remove(pcd);
+                    _dbContext.SaveChanges();
+                    result = true;
+                }
+                catch (DbUpdateException)
+                {
+                    result = false;
+                    throw;
+                }
+                catch (Exception)
+                {
+                    result = false;
+                    throw;
+                }
+            }
+            return result;
         }
 
         public IEnumerable<PowerConsumptionData> GetAll()
         {
-            return _dbContext.DbPowerConsumptionDataSet.ToList();
+            if (_dbContext.DbPowerConsumptionDataSet != null)
+            {
+                return _dbContext.DbPowerConsumptionDataSet.ToList();
+            }
+            return new List<PowerConsumptionData>();
         }
 
         public PowerConsumptionData GetById(int id)
         {
-            return _dbContext.DbPowerConsumptionDataSet.Find(id);
+            if (_dbContext.DbPowerConsumptionDataSet.FirstOrDefault(x => x.Id == id) != null)
+            {
+                return _dbContext.DbPowerConsumptionDataSet.Find(id);
+            }
+            return null;
         }
 
         public bool Insert(PowerConsumptionData entity)
         {
-            _dbContext.DbPowerConsumptionDataSet.Add(entity);
-            _dbContext.SaveChanges();
-
-            return true;
+            bool result = false;
+            if (_dbContext.DbPowerConsumptionDataSet.Find(entity) == null)
+            {
+                try
+                {
+                    _dbContext.DbPowerConsumptionDataSet.Add(entity);
+                    _dbContext.SaveChanges();
+                    result = true;
+                }
+                catch (DbUpdateException)
+                {
+                    result = false;
+                    throw;
+                }
+                catch (Exception)
+                {
+                    result = false;
+                    throw;
+                }
+            }
+            return result;
         }
 
         public bool Update(PowerConsumptionData entity)
         {
-            _dbContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-
-            return true;
+            bool result = false;
+            if (entity != null)
+            {
+                try
+                {
+                    _dbContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                    _dbContext.SaveChanges();
+                    result = true;
+                }
+                catch (DbUpdateException)
+                {
+                    result = false;
+                    throw;
+                }
+                catch (Exception)
+                {
+                    result = false;
+                    throw;
+                }
+            }
+            return result;
         }
     }
 }

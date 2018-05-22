@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
 
 namespace Entities.Models
 {
@@ -16,12 +15,12 @@ namespace Entities.Models
         public int Id { get; set; }
         [Required]
         [Column(TypeName = "datetime2")]
-        public DateTime Timestamp { get; set; }
+        public virtual DateTime Timestamp { get; set; }
         [Required]
-        public double Consumption { get; set; }
+        public virtual double Consumption { get; set; }
         [Required]
-        public string GeoAreaId { get; set; }
+        public virtual string GeoAreaId { get; set; }
         [ForeignKey("GeoAreaId")]
-        public GeoArea GeoArea { get; set; }
+        public virtual GeoArea GeoArea { get; set; }
     }
 }
