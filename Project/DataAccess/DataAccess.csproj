@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbContextProvider.cs" />
+    <Compile Include="PowerConsumptionDbContextProvider.cs" />
     <Compile Include="IDbContextProvider.cs" />
     <Compile Include="PowerConsumptionMigrations\201805222317128_CreateInitialModels.cs" />
     <Compile Include="PowerConsumptionMigrations\201805222317128_CreateInitialModels.Designer.cs">

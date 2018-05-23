@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class DbContextProvider : IDbContextProvider<PowerConsumptionDbContext>
+    public class PowerConsumptionDbContextProvider : IDbContextProvider<PowerConsumptionDbContext>
     {
         public PowerConsumptionDbContext GetDbContext()
         {
