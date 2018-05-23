@@ -1,11 +1,11 @@
-﻿using Entities;
-using Entities.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities;
+using Entities.Models;
 
 namespace DataAccess.ModelRepositories
 {
@@ -122,10 +122,7 @@ namespace DataAccess.ModelRepositories
             if (inputDate != null)
             {
                 return _dbContext.DbPowerConsumptionDataSet
-                    .Where(x =>
-                        x.Timestamp.Equals(inputDate.From) ||
-                        x.Timestamp.Equals(inputDate.To) ||
-                        (DateTime.Compare(x.Timestamp, inputDate.From) > 0 && (DateTime.Compare(x.Timestamp, inputDate.To)) < 0))
+                    .Where(x => x.Timestamp >= inputDate.From && x.Timestamp <= inputDate.To)
                     .ToList();
             }
             return new List<PowerConsumptionData>();
