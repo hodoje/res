@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.ModelRepositories
 {
-    public class PowerConsumptionDataRepository : IRepository<PowerConsumptionData, int>
+    public class PowerConsumptionDataRepository : IRepositoryWithDate<PowerConsumptionData, int>
     {
         private readonly PowerConsumptionDbContext _dbContext;
 
@@ -18,7 +18,50 @@ namespace DataAccess.ModelRepositories
             this._dbContext = dbContextProvider.GetDbContext();
         }
 
-        public bool Delete(int id)
+        IEnumerable<PowerConsumptionData> IRepository<PowerConsumptionData, int>.GetAll()
+        {
+            if (_dbContext.DbPowerConsumptionDataSet != null)
+            {
+                return _dbContext.DbPowerConsumptionDataSet.ToList();
+            }
+            return new List<PowerConsumptionData>();
+        }
+
+        PowerConsumptionData IRepository<PowerConsumptionData, int>.GetById(int id)
+        {
+            if (_dbContext.DbPowerConsumptionDataSet.FirstOrDefault(x => x.Id == id) != null)
+            {
+                return _dbContext.DbPowerConsumptionDataSet.Find(id);
+            }
+            return null;
+        }
+
+        bool IRepository<PowerConsumptionData, int>.Insert(PowerConsumptionData entity)
+        {
+            bool result = false;
+            if (_dbContext.DbPowerConsumptionDataSet.Find(entity) == null)
+            {
+                try
+                {
+                    _dbContext.DbPowerConsumptionDataSet.Add(entity);
+                    _dbContext.SaveChanges();
+                    result = true;
+                }
+                catch (DbUpdateException)
+                {
+                    result = false;
+                    throw;
+                }
+                catch (Exception)
+                {
+                    result = false;
+                    throw;
+                }
+            }
+            return result;
+        }
+
+        bool IRepository<PowerConsumptionData, int>.Delete(int id)
         {
             bool result = false;
             PowerConsumptionData pcd = _dbContext.DbPowerConsumptionDataSet.Find(id);
@@ -44,50 +87,7 @@ namespace DataAccess.ModelRepositories
             return result;
         }
 
-        public IEnumerable<PowerConsumptionData> GetAll()
-        {
-            if (_dbContext.DbPowerConsumptionDataSet != null)
-            {
-                return _dbContext.DbPowerConsumptionDataSet.ToList();
-            }
-            return new List<PowerConsumptionData>();
-        }
-
-        public PowerConsumptionData GetById(int id)
-        {
-            if (_dbContext.DbPowerConsumptionDataSet.FirstOrDefault(x => x.Id == id) != null)
-            {
-                return _dbContext.DbPowerConsumptionDataSet.Find(id);
-            }
-            return null;
-        }
-
-        public bool Insert(PowerConsumptionData entity)
-        {
-            bool result = false;
-            if (_dbContext.DbPowerConsumptionDataSet.Find(entity) == null)
-            {
-                try
-                {
-                    _dbContext.DbPowerConsumptionDataSet.Add(entity);
-                    _dbContext.SaveChanges();
-                    result = true;
-                }
-                catch (DbUpdateException)
-                {
-                    result = false;
-                    throw;
-                }
-                catch (Exception)
-                {
-                    result = false;
-                    throw;
-                }
-            }
-            return result;
-        }
-
-        public bool Update(PowerConsumptionData entity)
+        bool IRepository<PowerConsumptionData, int>.Update(PowerConsumptionData entity)
         {
             bool result = false;
             if (entity != null)
@@ -110,6 +110,20 @@ namespace DataAccess.ModelRepositories
                 }
             }
             return result;
+        }
+
+        IEnumerable<PowerConsumptionData> IRepositoryWithDate<PowerConsumptionData, int>.GetUnderSpecificDate(InputDate inputDate)
+        {
+            if (inputDate != null)
+            {
+                return _dbContext.DbPowerConsumptionDataSet
+                    .Where(x =>
+                        x.Timestamp.Equals(inputDate.From) ||
+                        x.Timestamp.Equals(inputDate.To) ||
+                        (DateTime.Compare(x.Timestamp, inputDate.From) > 0 && (DateTime.Compare(x.Timestamp, inputDate.To)) < 0))
+                    .ToList();
+            }
+            return new List<PowerConsumptionData>();
         }
     }
 }

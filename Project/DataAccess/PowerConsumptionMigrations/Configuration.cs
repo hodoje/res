@@ -1,4 +1,4 @@
-namespace DataAccess.PowerConsuptionMigrations
+namespace DataAccess.Migrations
 {
     using System;
     using System.Data.Entity;

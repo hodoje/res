@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="DbContextProvider.cs" />
     <Compile Include="IDbContextProvider.cs" />
+    <Compile Include="IRepositoryWithDate.cs" />
     <Compile Include="PowerConsumptionMigrations\201805222317128_CreateInitialModels.cs" />
     <Compile Include="PowerConsumptionMigrations\201805222317128_CreateInitialModels.Designer.cs">
       <DependentUpon>201805222317128_CreateInitialModels.cs</DependentUpon>
