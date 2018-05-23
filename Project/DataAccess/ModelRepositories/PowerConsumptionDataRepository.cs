@@ -29,9 +29,10 @@ namespace DataAccess.ModelRepositories
 
         PowerConsumptionData IRepository<PowerConsumptionData, int>.GetById(int id)
         {
-            if (_dbContext.DbPowerConsumptionDataSet.FirstOrDefault(x => x.Id == id) != null)
+            PowerConsumptionData pcd = _dbContext.DbPowerConsumptionDataSet.FirstOrDefault(x => x.Id == id);
+            if (pcd != null)
             {
-                return _dbContext.DbPowerConsumptionDataSet.Find(id);
+                return pcd;
             }
             return null;
         }
@@ -39,32 +40,36 @@ namespace DataAccess.ModelRepositories
         bool IRepository<PowerConsumptionData, int>.Insert(PowerConsumptionData entity)
         {
             bool result = false;
-            if (_dbContext.DbPowerConsumptionDataSet.Find(entity) == null)
+            if (entity != null)
             {
-                try
+                if (_dbContext.DbPowerConsumptionDataSet.FirstOrDefault(x => x.Equals(entity)) == null)
                 {
-                    _dbContext.DbPowerConsumptionDataSet.Add(entity);
-                    _dbContext.SaveChanges();
-                    result = true;
-                }
-                catch (DbUpdateException)
-                {
-                    result = false;
-                    throw;
-                }
-                catch (Exception)
-                {
-                    result = false;
-                    throw;
+                    try
+                    {
+                        _dbContext.DbPowerConsumptionDataSet.Add(entity);
+                        _dbContext.SaveChanges();
+                        result = true;
+                    }
+                    catch (DbUpdateException)
+                    {
+                        result = false;
+                        throw;
+                    }
+                    catch (Exception)
+                    {
+                        result = false;
+                        throw;
+                    }
                 }
             }
+            
             return result;
         }
 
         bool IRepository<PowerConsumptionData, int>.Delete(int id)
         {
             bool result = false;
-            PowerConsumptionData pcd = _dbContext.DbPowerConsumptionDataSet.Find(id);
+            PowerConsumptionData pcd = _dbContext.DbPowerConsumptionDataSet.FirstOrDefault(x => x.Id == id);
             if (pcd != null)
             {
                 try
