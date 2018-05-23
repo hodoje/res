@@ -8,7 +8,7 @@ using Entities.Models;
 
 namespace DataAccess
 {
-    interface IRepositoryWithDate<T, V>: IRepository<T, V>
+    public interface IRepositoryWithDate<T, V>: IRepository<T, V>
     {
         IEnumerable<T> GetUnderSpecificDate(InputDate inputDate);
     }

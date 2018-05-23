@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRepository.cs" />
+    <Compile Include="IRepositoryWithDate.cs" />
     <Compile Include="Models\GeoArea.cs" />
     <Compile Include="Models\InputDate.cs" />
     <Compile Include="Models\PowerConsumptionData.cs" />
