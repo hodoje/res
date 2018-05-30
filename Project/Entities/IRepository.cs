@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entities
 {
-    public interface IRepository<T,V>
+    public interface IRepository<T,V> where T : class
     {
-        IEnumerable<T> GetAll();
         T GetById(V id);
-        bool Insert(T entity);
-        bool Delete(V id);
-        bool Update(T entity);
+        IEnumerable<T> GetAll();
+        IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
+        
+
+        T Add(T entity);
+        void AddRange(IEnumerable<T> entities);
+
+
+        void Remove(T entity);
+        void RemoveRange(IEnumerable<T> entities);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Entities.Models;
 
 namespace UI.Controllers
 {
@@ -14,76 +15,22 @@ namespace UI.Controllers
             return View();
         }
 
-        // GET: PowerConsumption/Details/5
-        public ActionResult Details(int id)
+        public ActionResult GetData()
         {
             return View();
         }
 
-        // GET: PowerConsumption/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PowerConsumption/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult GetData(InputDate inputDate)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            TempData["inputDate"] = inputDate;
+            return RedirectToAction("ShowData");
         }
 
-        // GET: PowerConsumption/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult ShowData()
         {
-            return View();
-        }
-
-        // POST: PowerConsumption/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PowerConsumption/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PowerConsumption/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            InputDate inputDate = (InputDate) TempData["inputDate"];
+            return View(inputDate);
         }
     }
 }
