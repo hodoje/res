@@ -8,6 +8,6 @@ namespace FileReader
 {
     public interface IReader
     {
-        string Read();
+        string Read(string fileName);
     }
 }

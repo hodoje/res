@@ -8,6 +8,6 @@ namespace FileReader
 {
     public interface ILogger
     {
-        void Log(string dataToLog);
+        void Log(string dataToLog, string fileName);
     }
 }

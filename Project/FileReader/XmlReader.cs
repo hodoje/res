@@ -8,7 +8,7 @@ namespace FileReader
 {
     public class XmlReader : IReader
     {
-        public string Read()
+        public string Read(string fileName)
         {
             throw new NotImplementedException();
         }

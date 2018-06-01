@@ -8,7 +8,7 @@ namespace FileReader
 {
     public class XmlLogger : ILogger
     {
-        public void Log(string dataToLog)
+        public void Log(string dataToLog, string fileName)
         {
             throw new NotImplementedException();
         }
