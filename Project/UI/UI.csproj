@@ -214,9 +214,21 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{1193f3fe-381e-4a9d-a466-0a70fcb70084}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataProxy\DataProxy.csproj">
+      <Project>{9a7c9b3e-11df-4e92-8c47-3e83cee5dd42}</Project>
+      <Name>DataProxy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{6bc85d10-2eaa-4705-8368-d711e94f3dde}</Project>
       <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileReader\FileReader.csproj">
+      <Project>{d7f96361-c42e-46e5-badc-657b266389a4}</Project>
+      <Name>FileReader</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

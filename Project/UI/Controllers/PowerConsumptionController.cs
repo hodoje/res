@@ -5,16 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using Entities.Models;
 using DataAccess;
+using FileReader;
 
 namespace UI.Controllers
 {
     public class PowerConsumptionController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private IWatcher _watcher;
 
-        public PowerConsumptionController(IUnitOfWork unitOfWork)
+        public PowerConsumptionController(IUnitOfWork unitOfWork, IWatcher watcher)
         {
             _unitOfWork = unitOfWork;
+            _watcher = watcher;
+            _watcher.Watch();
         }
 
         // GET: PowerConsumption
