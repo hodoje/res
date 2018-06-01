@@ -4,11 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Entities.Models;
+using DataAccess;
 
 namespace UI.Controllers
 {
     public class PowerConsumptionController : Controller
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public PowerConsumptionController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         // GET: PowerConsumption
         public ActionResult Index()
         {
@@ -30,7 +38,10 @@ namespace UI.Controllers
         public ActionResult ShowData()
         {
             InputDate inputDate = (InputDate) TempData["inputDate"];
-            return View(inputDate);
+            List<PowerConsumptionData> listOfData = (List<PowerConsumptionData>)_unitOfWork
+                                                                                .PowerConsumptionDataRepository
+                                                                                .Find(x => x.Timestamp >= inputDate.From && x.Timestamp <= inputDate.To);
+            return View(listOfData);
         }
     }
 }
