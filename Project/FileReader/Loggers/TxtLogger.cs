@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FileReader.Interfaces;
 
-namespace FileReader
+namespace FileReader.Loggers
 {
-    public class CsvReader : IReader
+    public class TxtLogger : ILogger
     {
-        public string Read(string fileName)
+        public void Log(string dataToLog, string fileName)
         {
             throw new NotImplementedException();
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileReader
+namespace FileReader.Interfaces
 {
     public interface IWatcher
     {
