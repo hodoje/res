@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Models;
 
-namespace FileReader
+namespace FileReader.Interfaces
 {
     public interface IReader
     {
-        string Read(string fileName);
+        List<PowerConsumptionData> Read(string fileName);
     }
 }
