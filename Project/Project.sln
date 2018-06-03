@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{F1AE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{6BC85D10-2EAA-4705-8368-D711E94F3DDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerConsumptionUnitTests", "PowerConsumptionUnitTests\PowerConsumptionUnitTests.csproj", "{988DEBDC-0B59-4495-9130-3660DB84BC8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6BC85D10-2EAA-4705-8368-D711E94F3DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BC85D10-2EAA-4705-8368-D711E94F3DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BC85D10-2EAA-4705-8368-D711E94F3DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{988DEBDC-0B59-4495-9130-3660DB84BC8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{988DEBDC-0B59-4495-9130-3660DB84BC8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{988DEBDC-0B59-4495-9130-3660DB84BC8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{988DEBDC-0B59-4495-9130-3660DB84BC8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
