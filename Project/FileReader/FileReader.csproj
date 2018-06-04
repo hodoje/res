@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReadModel\ReadDataObject.cs" />
+    <Compile Include="Readers\CsvReader.cs" />
+    <Compile Include="Writers\DatabaseWriter.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IReader.cs" />
     <Compile Include="Interfaces\IWatcher.cs" />
