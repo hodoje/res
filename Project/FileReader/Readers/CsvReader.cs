@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Models;
 using FileReader.Interfaces;
 
 namespace FileReader.Readers
 {
     public class CsvReader : IReader
     {
-        public string Read(string fileName)
+        public List<PowerConsumptionData> Read(string fileName)
         {
             throw new NotImplementedException();
         }

@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace FileReader.ReadModel
 {
-    public class ReadDataObject
+    [XmlType(TypeName = "STAVKA")]
+    public class ReadDataType
     {
+        [XmlElement("SAT")]
         public string Sat { get; set; }
+        [XmlElement("LOAD")]
         public string Load { get; set; }
+        [XmlElement("OBLAST")]
         public string Oblast { get; set; }
     }
 }
