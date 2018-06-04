@@ -64,7 +64,7 @@ namespace UI.Controllers
                         .Find(x => x.Timestamp >= inputDate.From && x.Timestamp <= inputDate.To)
                         .ToList();
                 }
-                listOfData = listOfData.OrderBy(x => x.Timestamp.TimeOfDay).ToList();
+                listOfData = listOfData.OrderBy(x => x.GeoAreaId).ThenBy(x => x.Timestamp.TimeOfDay).ToList();
                 return View(listOfData);
             }
             else
