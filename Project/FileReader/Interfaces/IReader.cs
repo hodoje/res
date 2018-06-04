@@ -9,6 +9,6 @@ namespace FileReader.Interfaces
 {
     public interface IReader
     {
-        List<PowerConsumptionData> Read(string fileName);
+        List<PowerConsumptionData> Read(string fileName, out string errorMessage);
     }
 }

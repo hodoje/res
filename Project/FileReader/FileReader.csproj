@@ -40,19 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Readers\CsvReader.cs" />
     <Compile Include="ReadModel\ReadDataType.cs" />
+    <Compile Include="Readers\CsvReader.cs" />
     <Compile Include="Writers\DatabaseWriter.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IReader.cs" />
     <Compile Include="Interfaces\IWatcher.cs" />
     <Compile Include="Interfaces\IWriter.cs" />
-    <Compile Include="Loggers\TxtLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Readers\XmlReader.cs" />
+    <Compile Include="Loggers\TxtLogger.cs" />
     <Compile Include="Watcher.cs" />
+    <Compile Include="Readers\XmlReader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{1193F3FE-381E-4A9D-A466-0A70FCB70084}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{6bc85d10-2eaa-4705-8368-d711e94f3dde}</Project>
       <Name>Entities</Name>

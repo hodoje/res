@@ -5,19 +5,20 @@
 }
 
 <h2>ShowData</h2>
-
-<table class="table">
-    @foreach (PowerConsumptionData data in Model)
-    {
-        <tr>
-            <td>@data.Id</td>
-            <td>@data.GeoAreaId</td>
-            <td>@data.GeoArea</td>
-            <td>@data.Consumption</td>
-            <td>@data.Timestamp</td>
-        </tr>   
-    }
-</table>
+<div>
+    <table class="table">
+        @foreach (PowerConsumptionData data in Model)
+        {
+            <tr>
+                <td>@data.Id</td>
+                <td>@data.GeoAreaId</td>
+                <td>@data.GeoArea</td>
+                <td>@data.Consumption</td>
+                <td>@data.Timestamp</td>
+            </tr>   
+        }
+    </table>
+</div>
 <div>
     <a href="/PowerConsumption/GetData">Return to filter</a>
 </div>

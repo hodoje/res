@@ -10,7 +10,7 @@ namespace FileReader.Readers
 {
     public class CsvReader : IReader
     {
-        public List<PowerConsumptionData> Read(string fileName)
+        public List<PowerConsumptionData> Read(string fileName, out string errorMessage)
         {
             throw new NotImplementedException();
         }

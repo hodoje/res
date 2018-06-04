@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,13 @@ namespace FileReader.Loggers
 {
     public class TxtLogger : ILogger
     {
-        public void Log(string dataToLog, string fileName)
+        public void Log(string dataToLog, string logDirectory)
         {
-            throw new NotImplementedException();
+            string logFilePath = Path.Combine(logDirectory, "Log.txt");
+            using (StreamWriter sw = new StreamWriter(logFilePath, true))
+            {
+                sw.WriteLine(dataToLog);
+            }
         }
     }
 }
