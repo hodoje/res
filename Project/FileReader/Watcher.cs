@@ -59,15 +59,23 @@ namespace FileReader
 
         private void OnNewFileAdded(object sender, FileSystemEventArgs eventArgs)
         {
-            string errorMessage;
-            List<PowerConsumptionData> data = Reader.Read(eventArgs.FullPath, out errorMessage);
-            if (errorMessage == "")
+            string readErrorMessage;
+            string writeErrorMessage;
+
+            List<PowerConsumptionData> data = _reader.Read(eventArgs.FullPath, out readErrorMessage);
+
+            if (readErrorMessage == "")
             {
-                Writer.Write(data);
+                _writer.Write(data, out writeErrorMessage);
+
+                if (writeErrorMessage != "")
+                {
+                    _logger.Log($"File: '{eventArgs.Name}' Error(s): {writeErrorMessage}", _logDirectory);
+                }
             }
             else
             {
-                Logger.Log($"File: '{eventArgs.Name}' {errorMessage}", LogDirectory);
+                _logger.Log($"File: '{eventArgs.Name}' Error: {readErrorMessage}", _logDirectory);
             }
         }
     }

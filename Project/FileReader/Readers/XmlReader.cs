@@ -59,18 +59,18 @@ namespace FileReader.Readers
                             double consumption;
                             foreach (ReadDataType data in listOfData)
                             {
-
                                 Int32.TryParse(data.Hour, out hour);
-
                                 Double.TryParse(data.Load, out consumption);
+
                                 if (hour == 24)
                                 {
                                     hour = 0;
                                 }
+
                                 returnList.Add(new PowerConsumptionData
                                 {
                                     Timestamp = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
-                                        hour, DateTime.Now.Minute, DateTime.Now.Second),
+                                        hour, 0, 0),
                                     Consumption = consumption,
                                     GeoAreaId = data.GeoAreaId
                                 });
@@ -78,22 +78,22 @@ namespace FileReader.Readers
                         }
                         else
                         {
-                            errorMessage = $"Error: Time: {DateTime.Now}, Message: 'Data for hour '{missingHour}' is missing.'";
+                            errorMessage = $"Time: {DateTime.Now}, Message: 'Data for hour '{missingHour}' is missing.'";
                         }
                     }
                     else
                     {
-                        errorMessage = $"Error: Time: {DateTime.Now}, Message: 'There aren't 24 distinct values.'";
+                        errorMessage = $"Time: {DateTime.Now}, Message: 'There aren't 24 distinct values.'";
                     }
                 }
                 else
                 {
-                    errorMessage = $"Error: Time: {DateTime.Now}, Message: 'There aren't 24 values.'";
+                    errorMessage = $"Time: {DateTime.Now}, Message: 'There aren't 24 values.'";
                 }
             }
             else
             {
-                errorMessage = $"Error: Time: {DateTime.Now}, Message: 'Either missing proper root or some other error.'";
+                errorMessage = $"Time: {DateTime.Now}, Message: 'Either missing proper root or some other error.'";
             }
             return returnList;
         }

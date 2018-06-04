@@ -9,6 +9,6 @@ namespace FileReader.Interfaces
 {
     public interface IWriter
     {
-        void Write(List<PowerConsumptionData> data);
+        void Write(List<PowerConsumptionData> data, out string errorMessage);
     }
 }
