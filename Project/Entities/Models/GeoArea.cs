@@ -10,7 +10,7 @@ namespace Entities.Models
     public class GeoArea
     {
         [Key]
-        public string GeoAreaId { get; set; }
+        public string Id { get; set; }
         [Required]
         public virtual string Name { get; set; }
         public virtual ICollection<PowerConsumptionData> PowerConsumptionDatas { get; set; }

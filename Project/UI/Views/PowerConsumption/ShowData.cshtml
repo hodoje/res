@@ -7,15 +7,20 @@
 <h2>ShowData</h2>
 <div>
     <table class="table">
+        <tr>
+            <th>Area ID</th>
+            <th>Area Name</th>
+            <th>Power consumption[mW/h]</th>
+            <th>Timestamp</th>
+        </tr>
         @foreach (PowerConsumptionData data in Model)
         {
             <tr>
-                <td>@data.Id</td>
                 <td>@data.GeoAreaId</td>
-                <td>@data.GeoArea</td>
+                <td>@data.GeoArea.Name</td>
                 <td>@data.Consumption</td>
                 <td>@data.Timestamp</td>
-            </tr>   
+            </tr>
         }
     </table>
 </div>

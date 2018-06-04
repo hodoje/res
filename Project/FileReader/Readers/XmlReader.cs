@@ -38,14 +38,14 @@ namespace FileReader.Readers
             {
                 if (listOfData.Count == 24)
                 {
-                    if (listOfData.GroupBy(data => data.Sat).Select(x => x.First()).ToList().Count == 24)
+                    if (listOfData.GroupBy(data => data.Hour).Select(x => x.First()).ToList().Count == 24)
                     {
                         bool everyHourSet = true;
                         int missingHour = -1;
 
                         for (int i = 1; i <= 24; i++)
                         {
-                            if (!listOfData.Any(x => x.Sat == i.ToString()))
+                            if (!listOfData.Any(x => x.Hour == i.ToString()))
                             {
                                 everyHourSet = false;
                                 missingHour = i;
@@ -60,7 +60,7 @@ namespace FileReader.Readers
                             foreach (ReadDataType data in listOfData)
                             {
 
-                                Int32.TryParse(data.Sat, out hour);
+                                Int32.TryParse(data.Hour, out hour);
 
                                 Double.TryParse(data.Load, out consumption);
                                 if (hour == 24)
@@ -72,7 +72,7 @@ namespace FileReader.Readers
                                     Timestamp = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
                                         hour, DateTime.Now.Minute, DateTime.Now.Second),
                                     Consumption = consumption,
-                                    GeoAreaId = data.Oblast
+                                    GeoAreaId = data.GeoAreaId
                                 });
                             }
                         }

@@ -11,10 +11,10 @@ namespace FileReader.ReadModel
     public class ReadDataType
     {
         [XmlElement("SAT")]
-        public string Sat { get; set; }
+        public string Hour { get; set; }
         [XmlElement("LOAD")]
         public string Load { get; set; }
         [XmlElement("OBLAST")]
-        public string Oblast { get; set; }
+        public string GeoAreaId { get; set; }
     }
 }

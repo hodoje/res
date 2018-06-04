@@ -11,10 +11,10 @@ namespace DataAccess.Migrations
                 "dbo.GeoAreas",
                 c => new
                     {
-                        GeoAreaId = c.String(nullable: false, maxLength: 128),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false),
                     })
-                .PrimaryKey(t => t.GeoAreaId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.PowerConsumptionDatas",

@@ -12,7 +12,7 @@ namespace DataAccess
     {
         public DatabaseContext()
         {
-            this.Configuration.LazyLoadingEnabled = false;
+            //this.Configuration.LazyLoadingEnabled = false;
         }
 
         public virtual DbSet<PowerConsumptionData> PowerConsumptionDataSet { get; set; }

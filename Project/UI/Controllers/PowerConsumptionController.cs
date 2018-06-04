@@ -20,7 +20,6 @@ namespace UI.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: PowerConsumption
         public ActionResult Index()
         {
             return View();
@@ -60,11 +59,12 @@ namespace UI.Controllers
                 else
                 {
                     ViewBag.ErrorMessage = "";
-                    listOfData = (List<PowerConsumptionData>) _unitOfWork
+                    listOfData = _unitOfWork
                         .PowerConsumptionDataRepository
-                        .Find(x => x.Timestamp >= inputDate.From && x.Timestamp <= inputDate.To);
+                        .Find(x => x.Timestamp >= inputDate.From && x.Timestamp <= inputDate.To)
+                        .ToList();
                 }
-
+                listOfData = listOfData.OrderBy(x => x.Timestamp.TimeOfDay).ToList();
                 return View(listOfData);
             }
             else
