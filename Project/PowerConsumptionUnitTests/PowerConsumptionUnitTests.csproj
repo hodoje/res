@@ -66,11 +66,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PowerConsumptionUnitTests.DataAccess\DatabaseContextTests.cs" />
-    <Compile Include="PowerConsumptionUnitTests.DataAccess\GeoAreaDataRepositoryTests.cs" />
-    <Compile Include="PowerConsumptionUnitTests.DataAccess\PowerConsumptionDataRepositoryTests.cs" />
-    <Compile Include="PowerConsumptionUnitTests.DataAccess\UnitOfWorkTests.cs" />
-    <Compile Include="PowerConsumptionUnitTests.DataProxy\CacheManagerTests.cs" />
+
+    <Compile Include="PowerConsumptionUnitTests.DataAccess\DatabaseContextTest.cs" />
+    <Compile Include="PowerConsumptionUnitTests.DataAccess\GeoAreaDataRepositoryTest.cs" />
+    <Compile Include="PowerConsumptionUnitTests.DataAccess\PowerConsumptionDataRepositoryTest.cs" />
+    <Compile Include="PowerConsumptionUnitTests.DataAccess\UnitOfWorkTest.cs" />
+    <Compile Include="PowerConsumptionUnitTests.FileReader\TxtLoggerTest.cs" />
+    <Compile Include="PowerConsumptionUnitTests.FileReader\XmlReaderTest.cs" />
+	<Compile Include="PowerConsumptionUnitTests.DataProxy\CacheManagerTest.cs"/>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,12 +86,16 @@
       <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataProxy\DataProxy.csproj">
-      <Project>{9A7C9B3E-11DF-4E92-8C47-3E83CEE5DD42}</Project>
+      <Project>{9a7c9b3e-11df-4e92-8c47-3e83cee5dd42}</Project>
       <Name>DataProxy</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{6BC85D10-2EAA-4705-8368-D711E94F3DDE}</Project>
       <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileReader\FileReader.csproj">
+      <Project>{d7f96361-c42e-46e5-badc-657b266389a4}</Project>
+      <Name>FileReader</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
