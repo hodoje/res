@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReadModel\ReadDataType.cs" />
-    <Compile Include="Readers\CsvReader.cs" />
     <Compile Include="Writers\DatabaseWriter.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IReader.cs" />

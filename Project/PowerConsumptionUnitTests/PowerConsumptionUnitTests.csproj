@@ -70,6 +70,7 @@
     <Compile Include="PowerConsumptionUnitTests.DataAccess\GeoAreaDataRepositoryTests.cs" />
     <Compile Include="PowerConsumptionUnitTests.DataAccess\PowerConsumptionDataRepositoryTests.cs" />
     <Compile Include="PowerConsumptionUnitTests.DataAccess\UnitOfWorkTests.cs" />
+    <Compile Include="PowerConsumptionUnitTests.DataProxy\CacheManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,11 +82,16 @@
       <Project>{1193F3FE-381E-4A9D-A466-0A70FCB70084}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataProxy\DataProxy.csproj">
+      <Project>{9A7C9B3E-11DF-4E92-8C47-3E83CEE5DD42}</Project>
+      <Name>DataProxy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{6BC85D10-2EAA-4705-8368-D711E94F3DDE}</Project>
       <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -16,8 +16,16 @@ namespace DataAccess
         public UnitOfWork(DatabaseContext context)
         {
             _context = context;
-            PowerConsumptionDataRepository = new PowerConsumptionDataRepository(_context);
-            GeoAreaRepository = new GeoAreaRepository(_context);
+
+            try
+            {
+                PowerConsumptionDataRepository = new PowerConsumptionDataRepository(_context);
+                GeoAreaRepository = new GeoAreaRepository(_context);
+            }
+            catch
+            {
+                throw new NullReferenceException();
+            }
         }
 
         public IPowerConsumptionDataRepository PowerConsumptionDataRepository { get; private set; }

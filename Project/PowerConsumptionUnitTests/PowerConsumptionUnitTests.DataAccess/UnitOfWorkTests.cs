@@ -21,5 +21,15 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.DataAccess
 
             Assert.IsNotNull(unitOfWork);
         }
+
+        [Test]
+        public void UnitOfWork_Constructor_IsNull()
+        {
+            DatabaseContext context = null;
+
+            UnitOfWork unitOfWork = new UnitOfWork(context);
+
+            
+        }
     }
 }

@@ -12,10 +12,6 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.DataProxy
     [TestFixture]
     class CacheManagerTests
     {
-        [Test]
-        public void CacheManager_PropertyReturnType_ObjectCache()
-        {
-            var result = ICacheManager<PowerConsumptionData>
-        }
+        
     }
 }
