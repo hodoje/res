@@ -45,13 +45,13 @@ namespace DataProxy
             CachedData.Remove(key);
         }
 
-        public void Set(string key, object data, int cahceTime)
+        public void Set(string key, object data, int cacheTime)
         {
             if (data == null)
                 return;
 
             CacheItemPolicy policy = new CacheItemPolicy();
-            policy.AbsoluteExpiration = DateTime.Now + TimeSpan.FromHours(cahceTime);
+            policy.AbsoluteExpiration = DateTime.Now + TimeSpan.FromHours(cacheTime);
 
             CachedData.Add(new CacheItem(key, data), policy);
 

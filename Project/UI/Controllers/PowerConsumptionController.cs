@@ -17,7 +17,6 @@ namespace UI.Controllers
         //public IUnitOfWork UnitOfWork => _unitOfWork;
 
         private readonly IPowerConsumptionCachedData _cachedData;
-
         public IPowerConsumptionCachedData CachedData => _cachedData;
 
         public PowerConsumptionController(IPowerConsumptionCachedData cachedData)
