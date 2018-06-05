@@ -49,9 +49,9 @@
   <ItemGroup>
     <Compile Include="ModelRepositoryInterfaces\IGeoAreaRepository.cs" />
     <Compile Include="ModelRepositoryInterfaces\IPowerConsumptionDataRepository.cs" />
-    <Compile Include="PowerConsumptionMigrations\201806041750396_CreateInitialModels.cs" />
-    <Compile Include="PowerConsumptionMigrations\201806041750396_CreateInitialModels.Designer.cs">
-      <DependentUpon>201806041750396_CreateInitialModels.cs</DependentUpon>
+    <Compile Include="PowerConsumptionMigrations\201806042258273_CreateInitialModels.cs" />
+    <Compile Include="PowerConsumptionMigrations\201806042258273_CreateInitialModels.Designer.cs">
+      <DependentUpon>201806042258273_CreateInitialModels.cs</DependentUpon>
     </Compile>
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="ModelRepositories\GeoAreaRepository.cs" />
@@ -72,8 +72,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PowerConsumptionMigrations\201806041750396_CreateInitialModels.resx">
-      <DependentUpon>201806041750396_CreateInitialModels.cs</DependentUpon>
+    <EmbeddedResource Include="PowerConsumptionMigrations\201806042258273_CreateInitialModels.resx">
+      <DependentUpon>201806042258273_CreateInitialModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

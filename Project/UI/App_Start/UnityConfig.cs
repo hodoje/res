@@ -9,6 +9,8 @@ using System.IO;
 using FileReader.Writers;
 using UI.Controllers;
 using Unity.Injection;
+using DataProxy;
+using Entities.Models;
 
 namespace UI
 {
@@ -60,7 +62,8 @@ namespace UI
             DatabaseWriter writer = new DatabaseWriter(new UnitOfWork(new DatabaseContext()));
             //Watcher watcher = new Watcher(new XmlReader(), new TxtLogger(), writer, pathToWatch, logDirectory);
             container.RegisterType<IWatcher, Watcher>(new InjectionConstructor(new XmlReader(), new TxtLogger(), writer, pathToWatch, logDirectory));
-            container.RegisterType<PowerConsumptionController>(new InjectionConstructor(new UnitOfWork(new DatabaseContext())));
+            container.RegisterType<IPowerConsumptionCachedData, PowerConsumptionCachedData>(new InjectionConstructor(new CacheManager<PowerConsumptionData>(), new UnitOfWork(new DatabaseContext())));
+            container.RegisterType<PowerConsumptionController>(new InjectionConstructor(new PowerConsumptionCachedData(new CacheManager<PowerConsumptionData>(), new UnitOfWork(new DatabaseContext()))));
         }
     }
 }

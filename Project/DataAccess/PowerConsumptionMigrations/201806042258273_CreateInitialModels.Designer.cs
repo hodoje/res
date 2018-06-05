@@ -13,7 +13,7 @@ namespace DataAccess.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201806041750396_CreateInitialModels"; }
+            get { return "201806042258273_CreateInitialModels"; }
         }
         
         string IMigrationMetadata.Source
