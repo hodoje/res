@@ -12,10 +12,13 @@ namespace FileReader.Loggers
     {
         public void Log(string dataToLog, string logDirectory)
         {
-            string logFilePath = Path.Combine(logDirectory, "Log.txt");
-            using (StreamWriter sw = new StreamWriter(logFilePath, true))
+            if (!String.IsNullOrWhiteSpace(dataToLog) && !String.IsNullOrWhiteSpace(logDirectory))
             {
-                sw.WriteLine(dataToLog);
+                string logFilePath = Path.Combine(logDirectory, "Log.txt");
+                using (StreamWriter sw = new StreamWriter(logFilePath, true))
+                {
+                    sw.WriteLine(dataToLog);
+                }
             }
         }
     }
