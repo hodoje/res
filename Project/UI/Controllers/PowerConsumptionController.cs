@@ -44,10 +44,13 @@ namespace UI.Controllers
 
             if (inputDate != null)
             {
-                if (inputDate.From > inputDate.To)
+                if (inputDate.To != DateTime.MinValue)
                 {
-                    TempData["ErrorMessage"] = "'From' date has to be earlier than 'To' date.";
-                    return RedirectToAction("GetData");
+                    if (inputDate.From > inputDate.To)
+                    {
+                        TempData["ErrorMessage"] = "'From' date has to be earlier than 'To' date.";
+                        return RedirectToAction("GetData");
+                    }
                 }
 
                 listOfData = (List<PowerConsumptionData>)_cachedData.Get(inputDate);

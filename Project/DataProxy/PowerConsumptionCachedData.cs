@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,11 +53,7 @@ namespace DataProxy
 
         private IEnumerable<PowerConsumptionData> GetDataFromDb(string key)
         {
-            InputDate inputDate = new InputDate();
-            DateTime from = DateTime.Parse(key.Split('_')[0]);
-            DateTime to = DateTime.Parse(key.Split('_')[1]);
-            inputDate.From = from;
-            inputDate.To = to;
+            InputDate inputDate = KeyToDate(key);
 
             IEnumerable<PowerConsumptionData> listOfData;
 
@@ -66,10 +63,27 @@ namespace DataProxy
             }
             else
             {
-                listOfData = _unitOfWork
-                    .PowerConsumptionDataRepository
-                    .Find(x => x.Timestamp >= inputDate.From && x.Timestamp <= inputDate.To)
-                    .ToList();
+                if (inputDate.From == DateTime.MinValue)
+                {
+                    listOfData = _unitOfWork
+                        .PowerConsumptionDataRepository
+                        .Find(x => x.Timestamp <= inputDate.To)
+                        .ToList();
+                }
+                else if (inputDate.To == DateTime.MinValue)
+                {
+                    listOfData = _unitOfWork
+                        .PowerConsumptionDataRepository
+                        .Find(x => x.Timestamp >= inputDate.From)
+                        .ToList();
+                }
+                else
+                {
+                    listOfData = _unitOfWork
+                        .PowerConsumptionDataRepository
+                        .Find(x => x.Timestamp >= inputDate.From && x.Timestamp <= inputDate.To)
+                        .ToList();
+                }
             }
 
             return listOfData;
@@ -78,6 +92,16 @@ namespace DataProxy
         private void FillCacheWithData(string key)
         {
             _cacheManager.Set(key, GetDataFromDb(key), 2);
+        }
+
+        private InputDate KeyToDate(string key)
+        {
+            InputDate date = new InputDate();
+            DateTime from = DateTime.Parse(key.Split('_')[0]);
+            DateTime to = DateTime.Parse(key.Split('_')[1]);
+            date.From = from;
+            date.To = to;
+            return date;
         }
     }
 }
