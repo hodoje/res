@@ -33,6 +33,10 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.FileReader
             txtLogger = new Mock<TxtLogger>().Object;
         }
 
+        // All tests pass.
+        // They are commented because of the nature of the logger that appends text in a file.
+        // Before running each tests, clean the Log.txt file that you are writing to.
+
         //[Test]
         //public void LogTestGoodParameters()
         //{

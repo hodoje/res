@@ -53,10 +53,17 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.FileReader
                     hour = 0;
                 }
                 // Long line because of number of lines covered
-                convertedData.Add(new PowerConsumptionData { Timestamp = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hour, 0, 0), Consumption = consumption, GeoAreaId = data.GeoAreaId });
+                convertedData.Add(new PowerConsumptionData
+                {
+                    Timestamp = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hour, 0, 0),
+                    Consumption = consumption,
+                    GeoAreaId = data.GeoAreaId
+                });
             }
 
             bool equal = true;
+            Assert.IsNotEmpty(convertedData);
+            Assert.IsNotEmpty(listOfdata);
             foreach (PowerConsumptionData consumptionData in convertedData)
             {
                 if (listOfdata.FirstOrDefault(x => x.Timestamp == consumptionData.Timestamp && 
