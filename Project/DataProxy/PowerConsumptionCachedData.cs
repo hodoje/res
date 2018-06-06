@@ -2,8 +2,10 @@
 using Entities;
 using Entities.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,67 +13,95 @@ namespace DataProxy
 {
     public class PowerConsumptionCachedData : IPowerConsumptionCachedData
     {
-        private ICacheManager<PowerConsumptionData> _cacheManager;
-        private string _key;
-        private InputDate _inputDate;
         private IUnitOfWork _unitOfWork;
+        private ICacheManager<PowerConsumptionData> _cacheManager;
+        
 
-        public PowerConsumptionCachedData(ICacheManager<PowerConsumptionData> cache, IUnitOfWork unitOfWork)
+        public PowerConsumptionCachedData(ICacheManager<PowerConsumptionData> cacheManager, IUnitOfWork unitOfWork)
         {
-            _cacheManager = cache;
+            _cacheManager = cacheManager;
             _unitOfWork = unitOfWork;
         }
 
-        public ICacheManager<PowerConsumptionData> CacheManager { get { return _cacheManager; } }
-        public string Key { get { return _key; } set { _key = value; } }
-        public InputDate InputDate
+        public IEnumerable<PowerConsumptionData> Get(InputDate inputDate)
         {
-            private get;
-            set;
-        }
-
-        public IEnumerable<PowerConsumptionData> Get()
-        {
-            return GetData();
-        }
-
-        private IEnumerable<PowerConsumptionData> GetData()
-        {
-            if (!CacheManager.IsSet(_key))
+            string key = "";
+            if (inputDate.From == DateTime.MinValue && inputDate.To == DateTime.MaxValue)
             {
-                FillCacheWithData();
+                key += "All";
+            }
+            else
+            {
+                DateTime fromKeyPart = new DateTime(inputDate.From.Year, inputDate.From.Month, inputDate.From.Day, inputDate.From.Hour, 0, 0);
+                DateTime toKeyPart = new DateTime(inputDate.To.Year, inputDate.To.Month, inputDate.To.Day, inputDate.To.Hour, 0, 0);
+                key += $"{fromKeyPart}_{toKeyPart}";
+            }
+            return GetData(key);
+        }
+
+        private IEnumerable<PowerConsumptionData> GetData(string key)
+        {
+            if (!_cacheManager.IsSet(key))
+            {
+                FillCacheWithData(key);
             }
 
-            //TODO
-            IEnumerable<PowerConsumptionData> list = (List<PowerConsumptionData>)CacheManager.CachedData.GetCacheItem(_key, null).Value;
+            IEnumerable<PowerConsumptionData> list = (List<PowerConsumptionData>)_cacheManager.CachedData.GetCacheItem(key, null).Value;
 
             return list;
         }
 
-        private IEnumerable<PowerConsumptionData> GetDataFromDb()
+        private IEnumerable<PowerConsumptionData> GetDataFromDb(string key)
         {
+            InputDate inputDate = KeyToDate(key);
+
             IEnumerable<PowerConsumptionData> listOfData;
 
-            if (InputDate.From == DateTime.MinValue && InputDate.To == DateTime.MinValue)
+            if (inputDate.From == DateTime.MinValue && inputDate.To == DateTime.MinValue)
             {
                 listOfData = (List<PowerConsumptionData>)_unitOfWork.PowerConsumptionDataRepository.GetAll();
             }
             else
             {
-                listOfData = _unitOfWork
-                    .PowerConsumptionDataRepository
-                    .Find(x => x.Timestamp >= InputDate.From && x.Timestamp <= InputDate.To)
-                    .ToList();
+                if (inputDate.From == DateTime.MinValue)
+                {
+                    listOfData = _unitOfWork
+                        .PowerConsumptionDataRepository
+                        .Find(x => x.Timestamp <= inputDate.To)
+                        .ToList();
+                }
+                else if (inputDate.To == DateTime.MinValue)
+                {
+                    listOfData = _unitOfWork
+                        .PowerConsumptionDataRepository
+                        .Find(x => x.Timestamp >= inputDate.From)
+                        .ToList();
+                }
+                else
+                {
+                    listOfData = _unitOfWork
+                        .PowerConsumptionDataRepository
+                        .Find(x => x.Timestamp >= inputDate.From && x.Timestamp <= inputDate.To)
+                        .ToList();
+                }
             }
 
             return listOfData;
         }
 
-        private void FillCacheWithData()
+        private void FillCacheWithData(string key)
         {
-            CacheManager.Set(_key, GetDataFromDb(), 2);
+            _cacheManager.Set(key, GetDataFromDb(key), 2);
         }
 
-
+        private InputDate KeyToDate(string key)
+        {
+            InputDate date = new InputDate();
+            DateTime from = DateTime.Parse(key.Split('_')[0]);
+            DateTime to = DateTime.Parse(key.Split('_')[1]);
+            date.From = from;
+            date.To = to;
+            return date;
+        }
     }
 }

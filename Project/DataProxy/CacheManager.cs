@@ -13,14 +13,7 @@ namespace DataProxy
 {
     public class CacheManager<T> : ICacheManager<T> where T : class
     {
-
-        public ObjectCache CachedData
-        {
-            get
-            {
-                return MemoryCache.Default;
-            }
-        }
+        public ObjectCache CachedData => MemoryCache.Default;
 
         public void Clear()
         {
@@ -32,29 +25,42 @@ namespace DataProxy
 
         public T Get(string key)
         {
-            return (T)CachedData[key];
+            T entity = null;
+            if (!String.IsNullOrEmpty(key))
+            {
+                entity = (T)CachedData[key];
+            }
+            return entity;
         }
 
         public bool IsSet(string key)
         {
-            return CachedData.Contains(key);
+            if (!String.IsNullOrEmpty(key))
+            {
+                return CachedData.Contains(key);
+            }
+            return false;
         }
 
         public void Remove(string key)
         {
-            CachedData.Remove(key);
+            if (!String.IsNullOrEmpty(key))
+            {
+                CachedData.Remove(key);
+            }
         }
 
         public void Set(string key, object data, int cacheTime)
         {
-            if (data == null)
-                return;
+            if (data != null && !String.IsNullOrEmpty(key))
+            {
+                CacheItemPolicy policy = new CacheItemPolicy
+                {
+                    AbsoluteExpiration = DateTime.Now + TimeSpan.FromHours(cacheTime)
+                };
 
-            CacheItemPolicy policy = new CacheItemPolicy();
-            policy.AbsoluteExpiration = DateTime.Now + TimeSpan.FromHours(cacheTime);
-
-            CachedData.Add(new CacheItem(key, data), policy);
-
+                CachedData.Add(new CacheItem(key, data), policy);
+            }
         }
 
     }
