@@ -13,7 +13,6 @@ namespace DataProxy
 {
     public class CacheManager<T> : ICacheManager<T> where T : class
     {
-
         public ObjectCache CachedData
         {
             get
@@ -48,13 +47,16 @@ namespace DataProxy
         public void Set(string key, object data, int cacheTime)
         {
             if (data == null)
+            {
                 return;
+            }
 
-            CacheItemPolicy policy = new CacheItemPolicy();
-            policy.AbsoluteExpiration = DateTime.Now + TimeSpan.FromHours(cacheTime);
+            CacheItemPolicy policy = new CacheItemPolicy
+            {
+                AbsoluteExpiration = DateTime.Now + TimeSpan.FromHours(cacheTime)
+            };
 
             CachedData.Add(new CacheItem(key, data), policy);
-
         }
 
     }

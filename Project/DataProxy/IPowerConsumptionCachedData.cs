@@ -9,10 +9,6 @@ namespace DataProxy
 {
     public interface IPowerConsumptionCachedData
     {
-        ICacheManager<PowerConsumptionData> CacheManager { get; }
-        string Key { get; set; }
-        InputDate InputDate { set; }
-
-        IEnumerable<PowerConsumptionData> Get();
+        IEnumerable<PowerConsumptionData> Get(InputDate inputDate);
     }
 }
