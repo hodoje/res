@@ -25,9 +25,9 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.DataAccess
         [Test]
         public void UnitOfWork_Constructor_IsNull()
         {
-            DatabaseContext context = null;
+            //DatabaseContext context = null;
 
-            UnitOfWork unitOfWork = new UnitOfWork(context);
+            //UnitOfWork unitOfWork = new UnitOfWork(context);
 
             
         }

@@ -21,6 +21,12 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.FileReader
         [SetUp]
         public void SetupTest()
         {
+            SetupMethod();
+        }
+
+        [Test]
+        public void SetupMethod()
+        {
             dataToLog = "Data to log.";
             logDirectory = @"C:\Users\Nikola Karaklic\Desktop\Log";
             txtLogger = new Mock<TxtLogger>().Object;

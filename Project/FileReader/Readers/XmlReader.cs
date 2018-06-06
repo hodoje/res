@@ -21,80 +21,86 @@ namespace FileReader.Readers
             List<PowerConsumptionData> returnList = new List<PowerConsumptionData>();
             errorMessage = "";
 
-            using (StreamReader sr = new StreamReader(fileName))
+            if (!String.IsNullOrWhiteSpace(fileName))
             {
-                try
+                using (StreamReader sr = new StreamReader(fileName))
                 {
-                    listOfData = xs.Deserialize(sr) as List<ReadDataType>;
-                }
-                catch (Exception)
-                {
-                    listOfData = null;
-                }
-                
-            }
-
-            if (listOfData != null)
-            {
-                if (listOfData.Count == 24)
-                {
-                    if (listOfData.GroupBy(data => data.Hour).Select(x => x.First()).ToList().Count == 24)
+                    try
                     {
-                        bool everyHourSet = true;
-                        int missingHour = -1;
+                        listOfData = xs.Deserialize(sr) as List<ReadDataType>;
+                    }
+                    catch (Exception)
+                    {
+                        listOfData = null;
+                    }
 
-                        for (int i = 1; i <= 24; i++)
+                }
+
+                if (listOfData != null)
+                {
+                    if (listOfData.Count == 24)
+                    {
+                        if (listOfData.GroupBy(data => data.Hour).Select(x => x.First()).ToList().Count == 24)
                         {
-                            if (!listOfData.Any(x => x.Hour == i.ToString()))
-                            {
-                                everyHourSet = false;
-                                missingHour = i;
-                                break;
-                            }
-                        }
+                            bool everyHourSet = true;
+                            int missingHour = -1;
 
-                        if (everyHourSet)
-                        {
-                            int hour;
-                            double consumption;
-                            foreach (ReadDataType data in listOfData)
+                            for (int i = 1; i <= 24; i++)
                             {
-                                Int32.TryParse(data.Hour, out hour);
-                                Double.TryParse(data.Load, out consumption);
-
-                                if (hour == 24)
+                                if (!listOfData.Any(x => x.Hour == i.ToString()))
                                 {
-                                    hour = 0;
+                                    everyHourSet = false;
+                                    missingHour = i;
+                                    break;
                                 }
+                            }
 
-                                returnList.Add(new PowerConsumptionData
+                            if (everyHourSet)
+                            {
+                                int hour;
+                                double consumption;
+                                foreach (ReadDataType data in listOfData)
                                 {
-                                    Timestamp = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
-                                        hour, 0, 0),
-                                    Consumption = consumption,
-                                    GeoAreaId = data.GeoAreaId
-                                });
+                                    Int32.TryParse(data.Hour, out hour);
+                                    Double.TryParse(data.Load, out consumption);
+
+                                    if (hour == 24)
+                                    {
+                                        hour = 0;
+                                    }
+
+                                    returnList.Add(new PowerConsumptionData
+                                    {
+                                        Timestamp = new DateTime(DateTime.Now.Year, DateTime.Now.Month,
+                                            DateTime.Now.Day,
+                                            hour, 0, 0),
+                                        Consumption = consumption,
+                                        GeoAreaId = data.GeoAreaId
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                errorMessage =
+                                    $"Time: {DateTime.Now}, Message: 'Data for hour '{missingHour}' is missing.'";
                             }
                         }
                         else
                         {
-                            errorMessage = $"Time: {DateTime.Now}, Message: 'Data for hour '{missingHour}' is missing.'";
+                            errorMessage = $"Time: {DateTime.Now}, Message: 'There aren't 24 distinct values.'";
                         }
                     }
                     else
                     {
-                        errorMessage = $"Time: {DateTime.Now}, Message: 'There aren't 24 distinct values.'";
+                        errorMessage = $"Time: {DateTime.Now}, Message: 'There aren't 24 values.'";
                     }
                 }
                 else
                 {
-                    errorMessage = $"Time: {DateTime.Now}, Message: 'There aren't 24 values.'";
+                    errorMessage = $"Time: {DateTime.Now}, Message: 'Either missing proper root or some other error.'";
                 }
             }
-            else
-            {
-                errorMessage = $"Time: {DateTime.Now}, Message: 'Either missing proper root or some other error.'";
-            }
+            
             return returnList;
         }
     }

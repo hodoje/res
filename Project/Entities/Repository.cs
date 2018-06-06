@@ -21,18 +21,21 @@ namespace Entities
 
         public T GetById(V id)
         {
-            T tEntity;
-            try
+            T tEntity = null;
+            if (id != null)
             {
-                tEntity = _entities.Find(id);
-            }
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
+                try
+                {
+                    tEntity = _entities.Find(id);
+                }
+                catch (InvalidOperationException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
             return tEntity;
         }
