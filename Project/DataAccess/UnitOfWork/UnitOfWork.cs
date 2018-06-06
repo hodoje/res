@@ -17,15 +17,8 @@ namespace DataAccess
         {
             _context = context;
 
-            try
-            {
-                PowerConsumptionDataRepository = new PowerConsumptionDataRepository(_context);
-                GeoAreaRepository = new GeoAreaRepository(_context);
-            }
-            catch
-            {
-                throw new NullReferenceException();
-            }
+            PowerConsumptionDataRepository = new PowerConsumptionDataRepository(_context);
+            GeoAreaRepository = new GeoAreaRepository(_context);
         }
 
         public IPowerConsumptionDataRepository PowerConsumptionDataRepository { get; private set; }
