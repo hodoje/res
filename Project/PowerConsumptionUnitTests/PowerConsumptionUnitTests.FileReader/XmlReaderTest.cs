@@ -21,6 +21,7 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.FileReader
         [SetUp]
         public void SetupTest()
         {
+            // Until future fix, change this absolute path to whatever you like.
             logDirectory = @"C:\Users\Nikola Karaklic\Desktop\Readings";
             xmlReader = new Mock<XmlReader>().Object;
         }

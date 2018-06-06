@@ -28,6 +28,7 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.FileReader
         public void SetupMethod()
         {
             dataToLog = "Data to log.";
+            // Until future fix, change this absolute path to whatever you like.
             logDirectory = @"C:\Users\Nikola Karaklic\Desktop\Log";
             txtLogger = new Mock<TxtLogger>().Object;
         }
