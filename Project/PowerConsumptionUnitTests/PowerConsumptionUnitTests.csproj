@@ -71,7 +71,7 @@
     <Compile Include="PowerConsumptionUnitTests.DataAccess\GeoAreaDataRepositoryTest.cs" />
     <Compile Include="PowerConsumptionUnitTests.DataAccess\PowerConsumptionDataRepositoryTest.cs" />
     <Compile Include="PowerConsumptionUnitTests.DataAccess\UnitOfWorkTest.cs" />
-    <Compile Include="PowerConsumptionUnitTests.DataProxy\CacheManagerTest.cs" />
+    <Compile Include="PowerConsumptionUnitTests.DataProxy\PowerConsumptionCachedDataTest.cs" />
     <Compile Include="PowerConsumptionUnitTests.FileReader\TxtLoggerTest.cs" />
     <Compile Include="PowerConsumptionUnitTests.FileReader\XmlReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -12,6 +12,8 @@ namespace DataAccess
     {
         private readonly DatabaseContext _context;
 
+        public UnitOfWork() { }
+
         // Note that a user of UnitOfWork will pass a context and it will be used in all of the repositories
         public UnitOfWork(DatabaseContext context)
         {
@@ -21,8 +23,8 @@ namespace DataAccess
             GeoAreaRepository = new GeoAreaRepository(_context);
         }
 
-        public IPowerConsumptionDataRepository PowerConsumptionDataRepository { get; private set; }
-        public IGeoAreaRepository GeoAreaRepository { get; private set; }
+        public virtual IPowerConsumptionDataRepository PowerConsumptionDataRepository { get; private set; }
+        public virtual IGeoAreaRepository GeoAreaRepository { get; private set; }
 
         public int Complete()
         {
