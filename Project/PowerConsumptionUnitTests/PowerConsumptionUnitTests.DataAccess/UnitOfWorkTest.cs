@@ -1,8 +1,12 @@
 ﻿using DataAccess;
+using DataAccess.ModelRepositories;
+using Entities;
+using Entities.Models;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +27,28 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.DataAccess
         }
 
         [Test]
-        public void UnitOfWork_Constructor_IsNull()
+        public void UnitOfWork_AddAndSavePowerConsumptionDataEntity_ViaContext()
         {
+            var data = new List<PowerConsumptionData>
+            {
+                new PowerConsumptionData()
+                {
+                    Id = 1,
+                    Timestamp = new DateTime(2018, 6, 7),
+                    GeoAreaId = "SRB",
+                    Consumption = 0
+                }
+            }.AsQueryable();
 
-            UnitOfWork unitOfWork = new UnitOfWork();
+            var mockSet = new Mock<DbSet<PowerConsumptionData>>();
 
-            Assert
+            var mockContext = new Mock<DatabaseContext>();
+            mockContext.Setup(x => x.PowerConsumptionDataSet).Returns(mockSet.Object);
+
+            var unitOfWork = new UnitOfWork(mockContext.Object);
+
+            var result = unitOfWork.PowerConsumptionDataRepository.Add(data.First());
+
         }
     }
 }
