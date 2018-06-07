@@ -25,17 +25,8 @@ namespace DataProxy
 
         public IEnumerable<PowerConsumptionData> Get(InputDate inputDate)
         {
-            string key = "";
-            if (inputDate.From == DateTime.MinValue && inputDate.To == DateTime.MaxValue)
-            {
-                key += "All";
-            }
-            else
-            {
-                DateTime fromKeyPart = new DateTime(inputDate.From.Year, inputDate.From.Month, inputDate.From.Day, inputDate.From.Hour, 0, 0);
-                DateTime toKeyPart = new DateTime(inputDate.To.Year, inputDate.To.Month, inputDate.To.Day, inputDate.To.Hour, 0, 0);
-                key += $"{fromKeyPart}_{toKeyPart}";
-            }
+            string key = DateToKey(inputDate);
+            
             return GetData(key);
         }
 
@@ -92,6 +83,24 @@ namespace DataProxy
         private void FillCacheWithData(string key)
         {
             _cacheManager.Set(key, GetDataFromDb(key), 2);
+        }
+
+        private string DateToKey(InputDate inputDate)
+        {
+            string key = "";
+
+            if (inputDate.From == DateTime.MinValue && inputDate.To == DateTime.MaxValue)
+            {
+                key += "All";
+            }
+            else
+            {
+                DateTime fromKeyPart = new DateTime(inputDate.From.Year, inputDate.From.Month, inputDate.From.Day, inputDate.From.Hour, 0, 0);
+                DateTime toKeyPart = new DateTime(inputDate.To.Year, inputDate.To.Month, inputDate.To.Day, inputDate.To.Hour, 0, 0);
+                key += $"{fromKeyPart}_{toKeyPart}";
+            }
+
+            return key;
         }
 
         private InputDate KeyToDate(string key)
