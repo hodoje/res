@@ -37,7 +37,7 @@ namespace DataProxy
                 FillCacheWithData(key);
             }
 
-            IEnumerable<PowerConsumptionData> list = (List<PowerConsumptionData>)_cacheManager.CachedData.GetCacheItem(key, null).Value;
+            IEnumerable<PowerConsumptionData> list = (List<PowerConsumptionData>) _cacheManager.Get(key);
 
             return list;
         }
@@ -54,7 +54,11 @@ namespace DataProxy
             }
             else
             {
-                if (inputDate.From == DateTime.MinValue)
+                if (inputDate.From == DateTime.MinValue && inputDate.To == DateTime.MinValue)
+                {
+                    listOfData = _unitOfWork.PowerConsumptionDataRepository.GetAll();
+                }
+                else if (inputDate.From == DateTime.MinValue)
                 {
                     listOfData = _unitOfWork
                         .PowerConsumptionDataRepository
@@ -89,16 +93,9 @@ namespace DataProxy
         {
             string key = "";
 
-            if (inputDate.From == DateTime.MinValue && inputDate.To == DateTime.MaxValue)
-            {
-                key += "All";
-            }
-            else
-            {
-                DateTime fromKeyPart = new DateTime(inputDate.From.Year, inputDate.From.Month, inputDate.From.Day, inputDate.From.Hour, 0, 0);
-                DateTime toKeyPart = new DateTime(inputDate.To.Year, inputDate.To.Month, inputDate.To.Day, inputDate.To.Hour, 0, 0);
-                key += $"{fromKeyPart}_{toKeyPart}";
-            }
+            DateTime fromKeyPart = new DateTime(inputDate.From.Year, inputDate.From.Month, inputDate.From.Day, inputDate.From.Hour, 0, 0);
+            DateTime toKeyPart = new DateTime(inputDate.To.Year, inputDate.To.Month, inputDate.To.Day, inputDate.To.Hour, 0, 0);
+            key += $"{fromKeyPart}_{toKeyPart}";
 
             return key;
         }

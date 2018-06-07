@@ -13,12 +13,13 @@ namespace DataProxy
     {
         ObjectCache CachedData { get; }
 
-        T Get(string key);
+        //T Get(string key);
+        IEnumerable<T> Get(string key);
 
         void Set(string key, object data, int cacheTime);
         bool IsSet(string key);
 
-        void Remove(string key);
-        void Clear();
+        //void Remove(string key);
+        //void Clear();
     }
 }

@@ -15,39 +15,24 @@ namespace DataProxy
     {
         public ObjectCache CachedData => MemoryCache.Default;
 
-        public void Clear()
+        public IEnumerable<T> Get(string key)
         {
-            foreach (var item in CachedData)
-            {
-                Remove(item.Key);
-            }
-        }
-
-        public T Get(string key)
-        {
-            T entity = null;
+            IEnumerable<T> list = new List<T>();
             if (!String.IsNullOrEmpty(key))
             {
-                entity = (T)CachedData[key];
+                list = (IEnumerable<T>) CachedData[key];
             }
-            return entity;
+            return list;
         }
 
         public bool IsSet(string key)
         {
+            bool result = false;
             if (!String.IsNullOrEmpty(key))
             {
-                return CachedData.Contains(key);
+                result = CachedData.Contains(key);
             }
-            return false;
-        }
-
-        public void Remove(string key)
-        {
-            if (!String.IsNullOrEmpty(key))
-            {
-                CachedData.Remove(key);
-            }
+            return result;
         }
 
         public void Set(string key, object data, int cacheTime)

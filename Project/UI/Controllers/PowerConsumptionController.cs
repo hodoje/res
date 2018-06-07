@@ -44,6 +44,11 @@ namespace UI.Controllers
 
             if (inputDate != null)
             {
+                if (inputDate.From > DateTime.Now || inputDate.To > DateTime.Now)
+                {
+                    TempData["ErrorMessage"] = "'From' or 'To' date can't pass the date that is now.";
+                    return RedirectToAction("GetData");
+                }
                 if (inputDate.To != DateTime.MinValue)
                 {
                     if (inputDate.From > inputDate.To)
