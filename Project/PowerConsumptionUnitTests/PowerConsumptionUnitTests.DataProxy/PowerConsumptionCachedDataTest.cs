@@ -78,5 +78,61 @@ namespace PowerConsumptionUnitTests.PowerConsumptionUnitTests.DataProxy
 
             Assert.AreEqual(result.Count(), 4);
         }
+
+        [Test]
+        public void PowerConsumptionCachedData_NoFromDateEntered_Find()
+        {
+            var data = new List<PowerConsumptionData>()
+            {
+                new PowerConsumptionData()
+                {
+                    Id = 0,
+                    Timestamp = DateTime.Now,
+                    Consumption = 0,
+                    GeoArea = null,
+                    GeoAreaId = "SRB"
+                },
+                new PowerConsumptionData()
+                {
+                    Id = 1,
+                    Timestamp = DateTime.Now,
+                    Consumption = 0,
+                    GeoArea = null,
+                    GeoAreaId = "SRB"
+                },
+                new PowerConsumptionData()
+                {
+                    Id = 2,
+                    Timestamp = DateTime.Now,
+                    Consumption = 0,
+                    GeoArea = null,
+                    GeoAreaId = "SRB"
+                },
+                new PowerConsumptionData()
+                {
+                    Id = 3,
+                    Timestamp = DateTime.Now,
+                    Consumption = 0,
+                    GeoArea = null,
+                    GeoAreaId = "SRB"
+                }
+            }.AsEnumerable();
+
+            var inputDate = new InputDate()
+            {
+                From = new DateTime(1, 1, 1, 0, 0, 0, 0),
+                To = new DateTime(2018, 6, 7, 12, 0, 0)
+            };
+
+            var mockUOF = new Mock<UnitOfWork>();
+            mockUOF.Setup(m => m.PowerConsumptionDataRepository.Find(x => x.Timestamp <= inputDate.To)).Returns(data.ToList());
+
+            var pccd = new PowerConsumptionCachedData(new CacheManager<PowerConsumptionData>(),
+                                                        mockUOF.Object);
+
+            var result = pccd.Get(inputDate);
+
+            Assert.AreEqual(result.Count(), 4);
+        }
     }
 }
